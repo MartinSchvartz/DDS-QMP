@@ -4,6 +4,7 @@ public class Borrador {
   public Material material;
   public String colorPrincipal;
   public String colorSecundario;
+  public Integer temperaturaMaxima;
   public void seleccionarTipoDePrenda(TipoDePrenda tipoDePrenda){
     this.tipoDePrenda = requireNonNull(tipoDePrenda,"Se requiere un tipo de prenda");
   }
@@ -16,9 +17,11 @@ public class Borrador {
   public void seleccionarColorSecundario(String colorSecundario){
     this.colorSecundario = colorSecundario;
   };
-
+  public void seleccionarTemperaturaMaxima(Integer temperaturaMaximaAdecuada){
+    this.temperaturaMaxima = requireNonNull(temperaturaMaximaAdecuada,"La prenda debe tener una temperatura maxima adecuada");
+  }
   public Prenda generarNuevaPrenda(){
-    return new Prenda(this.tipoDePrenda,this.material,this.colorPrincipal,this.colorSecundario);
+    return new Prenda(this.tipoDePrenda,this.material,this.colorPrincipal,this.colorSecundario,this.temperaturaMaxima);
   }
 
 }

@@ -1,0 +1,80 @@
+@startuml
+class Prenda{
+  tipoDePrenda
+  material
+  colorPrincipal
+  colorSecunario
+  temperaturaMaxima
+}
+class TipoDePrenda{
+nombre
+categoria
+}
+class Sugerenciador{
+prendas
+filtrarPrendasPorCategoriaYTemperatura()
+sugerir()
+}
+class AccuWeatherApi{
+getWeather(String ciudad)
+}
+enum Categoria{
+  PARTE_SUPERIOR
+  CALZADO
+  PARTE_INFERIOR
+  ACCESORIOS
+}
+interface WeatherService{
+    temperature()
+}
+class WeatherState{
+    tiempoDeVencimiento
+    ciudad
+    fechaDeVencimiento
+}
+class Atuendo{
+prendasDelAtuendo
+agregarPrenda(unaPrenda)
+}
+class Borrador{
+tipoDePrenda
+material
+colorPrincipal
+colorSecunario
+generarNuevaPrenda()
+}
+abstract class Colegio{
+nombre
+uniforme
+}
+class Material{
+nombre
+tramaDeLaTela
+}
+enum Tramas{
+  LISA
+  RAYADA
+  CON_LUNARES
+  A_CUADROS
+  ESTAMPADO
+
+}
+class Uniforme{
+prendaSuperior
+prendaInferior
+prendaCalzado
+}
+Uniforme "3"-->  Prenda
+Uniforme ..> Colegio
+Material -->"1" Tramas
+Prenda --> Material
+Borrador ..> Prenda
+Sugerenciador -left-> WeatherService
+Atuendo -->"1..*" Prenda
+Sugerenciador ..>Atuendo
+Sugerenciador ..>"*" Prenda
+TipoDePrenda --> "1" Categoria
+WeatherState-->AccuWeatherApi
+WeatherState ..|> WeatherService
+Prenda --|> TipoDePrenda
+@enduml

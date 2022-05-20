@@ -1,0 +1,68 @@
+@startuml
+class Prenda{
+  tipoDePrenda
+  material
+  colorPrincipal
+  colorSecunario
+}
+class TipoDePrenda{
+nombre
+categoria
+}
+enum Categoria{
+  PARTE_SUPERIOR
+  CALZADO
+  PARTE_INFERIOR
+  ACCESORIOS
+}
+interface Provincia{
+
+}
+class Atuendo{
+prendasDelAtuendo
+agregarPrenda(unaPrenda)
+}
+class Borrador{
+tipoDePrenda
+material
+colorPrincipal
+colorSecunario
+generarNuevaPrenda()
+}
+abstract class Colegio{
+nombre
+uniforme
+}
+class Material{
+nombre
+tramaDeLaTela
+}
+enum Tramas{
+  LISA
+  RAYADA
+  CON_LUNARES
+  A_CUADROS
+  ESTAMPADO
+
+}
+class Uniforme{
+prendaSuperior
+prendaInferior
+prendaCalzado
+}
+class Usuario{
+nombre
+listaDeAtuendos
+borradores
+}
+Usuario -->"1..*" Borrador
+Usuario -->"1..*" Atuendo
+Uniforme "3"-->  Prenda
+Uniforme ..> Colegio
+Material -->"1" Tramas
+Prenda --> Material
+Borrador ..> Prenda
+Atuendo -->"1..*" Prenda
+TipoDePrenda --> "1" Categoria
+Prenda --> TipoDePrenda
+@enduml

@@ -3,6 +3,7 @@ import java.util.List;
 public class Usuario{
  private String nombre;
  private List<Atuendo> misAtuendos;
+ private List<Borrador> borradores;
  public Usuario(String nombre){
   this.nombre=nombre;
  }
