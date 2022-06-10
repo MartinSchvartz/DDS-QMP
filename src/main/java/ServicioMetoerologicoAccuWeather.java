@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WeatherState implements WeatherService{
+public class ServicioMetoerologicoAccuWeather implements WeatherService{
   private AccuWeatherAPI accuWeatherAPI;
   private String ciudad;
   private List<Map<String,Object>> weatherNow;
   private LocalDate fechaDeVencimiento;
   private Integer tiempoDeVencimiento;
-  public WeatherState(AccuWeatherAPI accuWeatherAPI, String ciudad,Integer tiempoDeVencimiento){
+  public ServicioMetoerologicoAccuWeather(AccuWeatherAPI accuWeatherAPI, String ciudad,Integer tiempoDeVencimiento){
     this.accuWeatherAPI = accuWeatherAPI;
     this.ciudad = ciudad;
     this.tiempoDeVencimiento = tiempoDeVencimiento;

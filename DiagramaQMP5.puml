@@ -1,0 +1,105 @@
+@startuml
+class Prenda{
+  tipoDePrenda
+  material
+  colorPrincipal
+  colorSecunario
+  temperaturaMaxima
+}
+class TipoDePrenda{
+nombre
+categoria
+}
+class Usuario{
+nombre
+apellido
+}
+class Guardarropa{
+prendas: List<Prenda>
+solicitudesPendientes: List<Solicitud>
+solicitudesRealizadas: List<Solicitud>
+usuarios: List<Usuario>
+criterio
+aceptarSolicitudPendiente(unaSolicitud)
+rechazarUnaSolicitudPendiente(unaSolicitud)
+deshacerPropuestaDeModificacion(unaSolicitud)
+}
+interface Solicitud{
+aceptarSolicitudEnGuardarropas()
+}
+class SolicitudDeAgregarPrenda implements Solicitud{
+}
+class SolicitudDeQuitarPrenda implements Solicitud{
+}
+class Sugerenciador{
+prendas
+filtrarPrendasPorCategoriaYTemperatura()
+sugerir()
+}
+class AccuWeatherApi{
+getWeather(String ciudad)
+}
+enum Categoria{
+  PARTE_SUPERIOR
+  CALZADO
+  PARTE_INFERIOR
+  ACCESORIOS
+}
+interface WeatherService{
+    temperature()
+}
+class WeatherState{
+    tiempoDeVencimiento
+    ciudad
+    fechaDeVencimiento
+}
+class Atuendo{
+prendasDelAtuendo
+agregarPrenda(unaPrenda)
+}
+class Borrador{
+tipoDePrenda
+material
+colorPrincipal
+colorSecunario
+generarNuevaPrenda()
+}
+abstract class Colegio{
+nombre
+uniforme
+}
+class Material{
+nombre
+tramaDeLaTela
+}
+enum Tramas{
+  LISA
+  RAYADA
+  CON_LUNARES
+  A_CUADROS
+  ESTAMPADO
+
+}
+class Uniforme{
+prendaSuperior
+prendaInferior
+prendaCalzado
+}
+
+Guardarropa -->"1..*" Solicitud
+Guardarropa -->"1..*" Prenda
+Guardarropa -->"1..*" Usuario
+Uniforme "3"-->  Prenda
+Uniforme ..> Colegio
+Material -->"1" Tramas
+Prenda --> Material
+Borrador ..> Prenda
+Sugerenciador -left-> WeatherService
+Atuendo -->"1..*" Prenda
+Sugerenciador ..>Atuendo
+Sugerenciador ..>"*" Prenda
+TipoDePrenda --> "1" Categoria
+WeatherState-->AccuWeatherApi
+WeatherState ..|> WeatherService
+Prenda --|> TipoDePrenda
+@enduml
