@@ -1,0 +1,55 @@
+@startuml
+class Usuario{
+email
+atuendoSugeridoDiario
+generaSugerencia(listaDePrendas,servicioDeClima)
+}
+Class Usuarios{
+listaDeUsuarios
+sugerirATodosLosUsuarios(Guardarropa, SercicioDeClima)
+}
+
+interface InteresadosAlClima{
+notificar(List<AlertaClimatica>)
+}
+
+class AlertaLluvia{
+
+}
+class AlertaSol{
+
+}
+
+class EstadoDeAlertasClimaticas{
+actualizarAlertas()
+}
+Enum AlertaClimatica{
+SOL,
+LLUVIA
+
+}
+interface NotificationService{}
+interface MailSender{}
+interface WeatherService{
+tempearture()
+getAlertas()
+}
+class EmailAlertaClimatica{
+mailSender
+notificar()
+}
+
+
+
+Usuarios --> "1..*" Usuario
+EmailAlertaClimatica ..|> InteresadosAlClima
+EmailAlertaClimatica --> MailSender
+Usuario ..> WeatherService
+EstadoDeAlertasClimaticas --> WeatherService
+EstadoDeAlertasClimaticas --> "*" InteresadosAlClima
+EstadoDeAlertasClimaticas --> "*" AlertaClimatica
+AlertaLluvia ..|> InteresadosAlClima
+AlertaSol ..|> InteresadosAlClima
+AlertaLluvia --> NotificationService
+AlertaSol --> NotificationService
+@enduml

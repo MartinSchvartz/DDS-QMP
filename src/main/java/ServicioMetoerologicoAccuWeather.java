@@ -3,6 +3,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ServicioMetoerologicoAccuWeather implements WeatherService{
   private AccuWeatherAPI accuWeatherAPI;
@@ -33,6 +34,14 @@ public class ServicioMetoerologicoAccuWeather implements WeatherService{
   public HashMap<String, Object> temperature() {
     return (HashMap<String, Object>) this.weatherNow.get(0).get("Temperature");
   }
+
+  @Override
+  public List<AlertaClimatica> getAlertasActuales() {
+    List<String> alertas = (List<String>) this.accuWeatherAPI.getAlertas(this.ciudad).get("CurrentAlerts");
+    return alertas.stream().map(x -> AlertaClimatica.valueOf(x)).collect(Collectors.toList());
+  }
+
+
   private Boolean expiroElTiempo(){
     return LocalDate.now().isAfter(this.fechaDeVencimiento);
   }

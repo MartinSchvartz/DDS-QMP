@@ -3,8 +3,9 @@ import java.util.List;
 public class Sugerenciador {
   private List<Prenda> prendas;
   private WeatherService miServicioDelClima;
-  public Sugerenciador(List<Prenda> prendas){
+  public Sugerenciador(List<Prenda> prendas, WeatherService miServicioDelClima){
     this.prendas =  prendas;
+    this.miServicioDelClima = miServicioDelClima;
   }
   public Atuendo sugerir(){
     Integer temperaturaActual = (Integer) miServicioDelClima.temperature().get("Value");

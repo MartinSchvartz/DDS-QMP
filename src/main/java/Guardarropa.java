@@ -30,30 +30,22 @@ public class Guardarropa {
   public List<Solicitud> getSolicitudesRealizadas(){
     return this.solicitudesRealizadas;
   }
+
   public void aceptarSolicitudPendeinte(Solicitud solicitudPendienteARealizar){
-    if(this.solicitudesPendientes.contains(solicitudPendienteARealizar)){
       solicitudPendienteARealizar.aplicarEn(this);
       this.agregarSolicitudRealizada(solicitudPendienteARealizar);
       this.solicitudesPendientes.remove(solicitudPendienteARealizar);
-    }else{
-      throw new RuntimeException("Intentaste aceptar una solicitud que no esta pendeinte!");
-    }
+
   }
   public void rechazarSolicitudPendiente(Solicitud solicitudPendienteARealizar){
-    if(this.solicitudesPendientes.contains(solicitudPendienteARealizar)){
+
       this.solicitudesPendientes.remove(solicitudPendienteARealizar);
-    }else{
-      throw new RuntimeException("Intentaste rechazar una solicitud que no esta pendeinte!");
-    }
+
   }
 
   public void deshacerPropuestaDeModificacion(Solicitud propuestaADeshacer){
-    if (this.solicitudesRealizadas.contains(propuestaADeshacer)){
       propuestaADeshacer.revertirAplicacion(this);
       this.solicitudesRealizadas.remove(propuestaADeshacer);
-    }else{
-      throw new RuntimeException("Intentaste deshacer el cambio de una propuesta que nunca aceptaste!");
-    }
   }
   public void deshacerTodo(){
     for (Solicitud unaSolicitudRealizada:
@@ -66,6 +58,9 @@ public class Guardarropa {
          this.solicitudesPendientes) {
       unaSolicitudPendiente.aplicarEn(this);
     }
+  }
+  public List<Prenda> getPrendas(){
+    return this.prendas;
   }
   public void quitarPrenda(Prenda prendaAQuitar) {
     prendas.remove(prendaAQuitar);
